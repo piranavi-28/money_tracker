@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1>🏦WorthNest</h1>
+            <ul class="main">
+                <li>Spend</li>
+                <li>Save</li>
+                <li>Grow</li>
+            </ul>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Expenses.html">Expenses</a></li>
+            </ul>
+        </nav>
+        <div class="head">
+            <div class="Title">
+                <h1>WorthNest</h1>
+                <p>Spend with purpose. Save for what matters.</p>
+            </div>
+            <div class="display">
+                <span id="date"></span>
+                <span id="time"></span>
+                <input id="monthSelect" type="month">
+            </div>
+        </div>
+
+    </header>
+    <main>
+        <div class="top">
+            <section>
+                <div class="box">Total Spend <span id="total">0</span></div>
+            </section>
+            <section>
+                <div class="box">Number of elements <span id="numelements">0</span></div>
+            </section>
+            <section>
+                <div class="box">Remaining Amount <span id="remaining">0</span></div>
+            </section>
+            <section>
+                <div class="box">Monthly Target<span id="target">0</span></div>
+            </section>
+            <section class="box-budget">
+                <label for="Target">Set Monthly Target</label>
+                <input id="Target" type="number" min="1" placeholder="e.g 1000">
+                <button id="save-target">Save</button>
+            </section>
+        </div>
+
+        <div id="budgetWarning" class="warning"></div>
+
+        <form class="get-data">
+            <h2>Add Expense</h2>
+            <table>
+                <tr>
+                    <td>Expense Name</td>
+                    <td>Amount (₹)</td>
+                    <td>Category</td>
+                    <td>Date</td>
+                </tr>
+                <tr>
+                    <td><input id="Name" type="text" placeholder="e.g: Groceries"></td>
+                    <td><input id="Amount" type="number" min="0" placeholder="e.g: 100"></td>
+                    <td>
+                        <select id="Category">
+                            <option value="0">---Select---</option>
+                            <option>Food</option>
+                            <option>Travel</option>
+                            <option>Shopping</option>
+                            <option>Housing/Rent</option>
+                            <option>Entertainment</option>
+                            <option>Education</option>
+                            <option>Bills & Utilities</option>
+                            <option>Health & Medical</option>
+                            <option>Personal Care</option>
+                            <option>Other</option>
+                        </select>
+                    </td>
+                    <td><input id="expenseDate" type="date"></td>
+                    <td><button type="button" id="add">+ Add Expense</button></td>
+                </tr>
+            </table>
+        </form>
+        <div class="content-box">
+            <div class="content">
+                <div class="content-left">
+                    <input type="text" id="search" placeholder="Search by Name">
+                    <select id="category">
+                        <option value="0">All Category</option>
+                        <option>Food</option>
+                        <option>Travel</option>
+                        <option>Shopping</option>
+                        <option>Housing/Rent</option>
+                        <option>Entertainment</option>
+                        <option>Education</option>
+                        <option>Bills & Utilities</option>
+                        <option>Health & Medical</option>
+                        <option>Personal Care</option>
+                        <option>Other</option>
+                    </select>
+                    <select id="date-sort">
+                        <option value="newest">Sort by Newest Date</option>
+                        <option value="oldest">Sort by Oldest Date</option>
+                    </select>
+                    <button type="button" id="reset">⟳ Reset Filters</button>
+                </div>
+                <div class="content-right">
+                    <button type="file" id="export">⇩ Export JSON</button>
+                    <button type="file" id="import">⇧ Import JSON</button>
+                    <input type="file" id="datafile" accept=".json,application/json" hidden>
+                    <button type="button" class="clearall">🗑 Clear All</button>
+                </div>
+
+            </div>
+            <table class="itemTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="itemList"></tbody>
+            </table>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        nav {
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <title>Expenses</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1>🏦WorthNest</h1>
+            <ul class="main">
+                <li>Spend</li>
+                <li>Save</li>
+                <li>Grow</li>
+            </ul>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Expenses.html">Expenses</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="content-box">
+            <div class="content">
+                <div class="content-left">
+                    <input type="text" id="search" placeholder="Search by Name">
+                    <select id="category">
+                        <option value="0">All Category</option>
+                        <option>Food</option>
+                        <option>Travel</option>
+                        <option>Shopping</option>
+                        <option>Housing/Rent</option>
+                        <option>Entertainment</option>
+                        <option>Education</option>
+                        <option>Bills & Utilities</option>
+                        <option>Health & Medical</option>
+                        <option>Personal Care</option>
+                        <option>Other</option>
+                    </select>
+                    <select id="date-sort">
+                        <option value="newest">Sort by Newest Date</option>
+                        <option value="oldest">Sort by Oldest Date</option>
+                    </select>
+                    <button type="button" id="reset">⟳ Reset Filters</button>
+                </div>
+                <div class="content-right">
+                    <button type="file" id="export">⇩ Export JSON</button>
+                    <button type="file" id="import">⇧ Import JSON</button>
+                    <input type="file" id="datafile" accept=".json,application/json" hidden>
+                    <button type="button" class="clearall">🗑 Clear All</button>
+                </div>
+
+            </div>
+            <table class="itemTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="itemList"></tbody>
+            </table>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
