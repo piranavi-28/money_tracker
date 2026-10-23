@@ -43,6 +43,9 @@ let Reset = document.getElementById("reset");
 let expenseList = document.getElementById("itemList");
 let clear = document.querySelector(".clearall");
 
+const exportButton = document.getElementById("export");
+const importButton = document.getElementById("import");
+const dataFile = document.getElementById("datafile");
 
 const expanseStorage = "WorthNestExpenses";
 const budgetStorage = "WorthNestBudget";
@@ -67,6 +70,43 @@ if (monthlyBudget > 0) {
 
 function saveItems() {
     localStorage.setItem(expanseStorage, JSON.stringify(items));
+}
+
+function exportData() {
+    const jsonText = JSON.stringify(items, null, 2);
+    const file = new Blob([jsonText], {type: "application/json"});
+    const fileURL = URL.createObjectURL(file);
+    const link = document.createElement("a");
+    link.href = fileURL;
+    link.download = "expense.json";
+    link.click();
+
+    URL.revokeObjectURL(fileURL);
+}
+
+async function importData() {
+    const file = dataFile.files[0];
+
+    if (!file) return;
+    try {
+        const importItems = JSON.parse(await file.text());
+        if (!Array.isArray(importItems)) {
+            alert("This file is not a expense list.");
+            return;
+        }
+        if (!confirm("This will replace your expenses. Want to Continue?")) {
+            return;
+        }
+        items = importItems;
+        saveItems();
+        displayExpenses();
+        update();
+        alert("Expenses imported.");
+    } catch {
+        alert("Could not read that file. Please choose a valid expenses JSON file.");
+    } finally {
+        dataFile.value = "";
+    }
 }
 
 function addExpense() {
@@ -210,7 +250,7 @@ function clearAll() {
         return;
     }
     items = [];
-    savebudget();
+    saveItems();
     displayExpenses();
     update();
 }
@@ -225,3 +265,9 @@ dateSort.onchange = displayExpenses;
 
 displayExpenses();
 update();
+
+exportButton.onclick = exportData;
+importButton.onclick = function() {
+    dataFile.click();
+};
+dataFile.onchange = importData;
